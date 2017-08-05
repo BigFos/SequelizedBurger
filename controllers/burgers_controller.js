@@ -4,10 +4,10 @@ var router = express.Router();
 
 var db = require("../models");
 
-module.exports = function(app) {
+// module.exports = function(app) {
 
   // GET route for getting all of the todos
-  app.get("/", function(req, res) {
+  router.get("/", function(req, res) {
     // findAll returns all entries for a table when used with no options
     db.Burger.findAll({}).then(function(dbBurger) {
         var hbsObject = {
@@ -29,7 +29,7 @@ module.exports = function(app) {
 //     });
 // });
   // POST route for saving a new todo
-  app.post("/", function(req, res) {
+  router.post("/", function(req, res) {
     // create takes an argument of an object describing the item we want to
     // insert into our table. In this case we just we pass in an object with a text
     // and complete property (req.body)
@@ -73,7 +73,7 @@ module.exports = function(app) {
   // });
 
   // PUT route for updating todos. We can get the updated todo data from req.body
-  app.put("/:id", function(req, res) {
+  router.put("/:id", function(req, res) {
 
     // Update takes in an object describing the properties we want to update, and
     // we use where to describe which objects we want to update
@@ -94,7 +94,7 @@ module.exports = function(app) {
       res.json(err);
     });
   });
-};
+// };
 
 // router.put("/:id", function(req, res) {
 //     var condition = "id = " + req.params.id;
@@ -108,4 +108,4 @@ module.exports = function(app) {
 //     });
 // });
 
-// module.exports = router;
+module.exports = router;
