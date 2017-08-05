@@ -1,22 +1,43 @@
-var orm = require("../config/orm.js");
-
-var burger = {
-    all: function(cb) {
-        orm.all("burgers", function(res) {
-            cb(res);
-        });
+module.exports = function(sequelize, DataTypes) {
+  var Burger = sequelize.define("Burger", {
+    burger_name: {
+      type: DataTypes.STRING,
+      // AllowNull is a flag that restricts a todo from being entered if it doesn't
+      // have a text value
+      allowNull: false,
+      // len is a validation that checks that our todo is between 1 and 140 characters
+      validate: {
+        len: [1, 140]
+      }
     },
-
-    create: function(cols, vals, cb) {
-        orm.create("burgers", cols, vals, function(res) {
-            cb(res);
-        });
-    },
-    update: function(objColVals, condition, cb) {
-        orm.update("burgers", objColVals, condition, function(res) {
-            cb(res);
-        });
+    devoured: {
+      type: DataTypes.BOOLEAN,
+      // defaultValue is a flag that defaults a new todos complete value to false if
+      // it isn't supplied one
+      defaultValue: false
     }
+  });
+  return Burger;
 };
+// var orm = require("../config/orm.js");
 
-module.exports = burger;
+// var burger = {
+//     all: function(cb) {
+//         orm.all("burgers", function(res) {
+//             cb(res);
+//         });
+//     },
+
+//     create: function(cols, vals, cb) {
+//         orm.create("burgers", cols, vals, function(res) {
+//             cb(res);
+//         });
+//     },
+//     update: function(objColVals, condition, cb) {
+//         orm.update("burgers", objColVals, condition, function(res) {
+//             cb(res);
+//         });
+//     }
+// };
+
+// module.exports = burger;
